@@ -21,6 +21,10 @@
       "icon": "assets/example_mod/icon.png"
     },
 
+    "entrypoints": {
+      "init": "com.example.example_mod.ExampleMod"
+    },
+
     "depends": [
       {
         "id": "quilt_loader",
