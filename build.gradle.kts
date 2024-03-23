@@ -56,13 +56,6 @@ dependencies {
 
     // Kotlin
     implementation(kotlin("stdlib-jdk8"))
-
-    /// ========== NOTE: Following lines will no longer be needed in Cosmic Quilt 1.1.3 (once it releases) ========= ///
-    // Quilt Loader
-    implementation("org.quiltmc:quilt-loader:${project.properties["quilt_loader_version"].toString()}")
-    // Mixins
-    implementation("org.spongepowered:mixin:${project.properties["mixin_version"].toString()}")
-    implementation("io.github.llamalad7:mixinextras-fabric:${project.properties["mixinextras_version"].toString()}") // Note: Despite it saying "fabric", its implementation is also for quilt
 }
 
 tasks.processResources {
