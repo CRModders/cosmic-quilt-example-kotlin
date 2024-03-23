@@ -46,7 +46,7 @@ val cosmicreach: Configuration by configurations.creating {
 }
 
 val quiltMod: Configuration by configurations.creating {
-    configurations.implementation.get().extendsFrom(this, cosmicreach)
+    configurations.implementation.get().extendsFrom(this)
 }
 
 dependencies {
