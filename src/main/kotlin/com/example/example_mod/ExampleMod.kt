@@ -12,3 +12,4 @@ class ExampleMod : ModInitializer {
         println("Hello from $MOD_ID!")
     }
 }
+

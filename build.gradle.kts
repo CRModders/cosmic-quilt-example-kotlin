@@ -41,43 +41,28 @@ repositories {
     mavenCentral()
 }
 
+val cosmicreach: Configuration by configurations.creating {
+    configurations.compileOnly.get().extendsFrom(this)
+}
 
-val cosmicreach = configurations.create("cosmicreach")
-
+val quiltMod: Configuration by configurations.creating {
+    configurations.implementation.get().extendsFrom(this, cosmicreach)
+}
 
 dependencies {
-    // Cosmic Reach jar
-    cosmicreach("finalforeach:cosmicreach:${project.properties["cosmic_reach_version"].toString()}") // Allows it to be used later in the gradle configuration
-    implementation("finalforeach:cosmicreach:${project.properties["cosmic_reach_version"].toString()}") // Allows it to be referenced in the code
+    // Cosmic Reach
+    cosmicreach("finalforeach:cosmicreach:${project.properties["cosmic_reach_version"].toString()}")
+    quiltMod("org.codeberg.CRModders:cosmic-quilt:${project.properties["cosmic_quilt_version"].toString()}")
 
-    // Cosmic Quilt
-    implementation("org.codeberg.CRModders:cosmic-quilt:${project.properties["cosmic_quilt_version"].toString()}")
+    // Kotlin
+    implementation(kotlin("stdlib-jdk8"))
 
-    //  The dependencies below are part of Cosmic Quilt
+    /// ========== NOTE: Following lines will no longer be needed in Cosmic Quilt 1.1.3 (once it releases) ========= ///
     // Quilt Loader
     implementation("org.quiltmc:quilt-loader:${project.properties["quilt_loader_version"].toString()}")
-    implementation("org.quiltmc:quilt-json5:${project.properties["quilt_json_version"].toString()}")
-    implementation("org.quiltmc:tiny-remapper:${project.properties["quilt_remapper_version"].toString()}")
-    implementation("org.quiltmc:tiny-mappings-parser:${project.properties["quilt_tiny_mappings_parser_version"].toString()}")
-    implementation("org.quiltmc:quilt-config:${project.properties["quilt_config_version"].toString()}")
-    implementation("net.fabricmc:access-widener:${project.properties["fabric_accesswidener_version"].toString()}")
-    // Slf4j
-    implementation("org.slf4j:slf4j-api:${project.properties["slf4j_version"].toString()}")
-    implementation("org.slf4j:slf4j-jdk14:${project.properties["slf4j_version"].toString()}")
-    implementation("uk.org.lidalia:sysout-over-slf4j:${project.properties["slf4j_sysout_helper_version"].toString()}")
     // Mixins
     implementation("org.spongepowered:mixin:${project.properties["mixin_version"].toString()}")
     implementation("io.github.llamalad7:mixinextras-fabric:${project.properties["mixinextras_version"].toString()}") // Note: Despite it saying "fabric", its implementation is also for quilt
-    // Extra libraries
-    implementation("com.google.guava:guava:${project.properties["guava_version"].toString()}")
-    implementation("com.google.code.gson:gson:${project.properties["gson_version"].toString()}")
-    implementation("org.ow2.asm:asm:${project.properties["asm_version"].toString()}")
-    implementation("org.ow2.asm:asm-util:${project.properties["asm_version"].toString()}")
-    implementation("org.ow2.asm:asm-tree:${project.properties["asm_version"].toString()}")
-    implementation("org.ow2.asm:asm-analysis:${project.properties["asm_version"].toString()}")
-    implementation("org.ow2.asm:asm-commons:${project.properties["asm_version"].toString()}")
-    // Kotlin
-    implementation(kotlin("stdlib-jdk8"))
 }
 
 tasks.processResources {
@@ -99,13 +84,21 @@ tasks.processResources {
     }
 }
 
+// Sets up all the Quilt Mods
+fun getQuiltModLocations(config: Configuration): String {
+    val sb = StringBuilder();
+    for (obj in config.allDependencies) {
+        sb.append(":" + config.files(obj).first())
+    }
+    return sb.toString()
+}
+
 var jarFile = tasks.named<Jar>("jar").flatMap { jar -> jar.archiveFile }.get().asFile
 println("Mod JAR File: `$jarFile'")
 val defaultArgs = listOf(
     "-Dloader.skipMcProvider=true",
-    "-Dloader.development=true",
     "-Dloader.gameJarPath=${cosmicreach.asPath}", // Defines path to Cosmic Reach
-//    "-Dloader.addMods=$jarFile" // Add the jar of this project
+    "-Dloader.addMods=$jarFile${getQuiltModLocations(quiltMod)}" // Add the jar of this project
 )
 
 application {
