@@ -27,7 +27,7 @@
 
     "depends": [
       {
-        "id": "quilt_loader",
+        "id": "cosmic_quilt",
         "versions": "*"
       },
       {
