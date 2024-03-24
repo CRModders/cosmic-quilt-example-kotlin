@@ -81,7 +81,7 @@ tasks.processResources {
 fun getQuiltModLocations(config: Configuration): String {
     val sb = StringBuilder();
     for (obj in config.allDependencies) {
-        sb.append(":" + config.files(obj).first())
+        sb.append(File.pathSeparator + config.files(obj).first())
     }
     return sb.toString()
 }
