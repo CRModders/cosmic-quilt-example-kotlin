@@ -45,10 +45,6 @@ val cosmicreach: Configuration by configurations.creating {
     configurations.compileOnly.get().extendsFrom(this)
 }
 
-val quiltMod: Configuration by configurations.creating {
-    configurations.implementation.get().extendsFrom(this)
-}
-
 dependencies {
     // Cosmic Reach
     cosmicreach("finalforeach:cosmicreach:${project.properties["cosmic_reach_version"].toString()}")
@@ -58,7 +54,7 @@ dependencies {
 
     // FluxAPI
     //  If you don't want FluxAPI included in your project, remove this and the reference in the `gradle.properties`
-//    quiltMod("com.github.CRModders:FluxAPI:${project.properties["fluxapi_version"].toString()}")
+//    implementation("com.github.CRModders:FluxAPI:${project.properties["fluxapi_version"].toString()}")
 
     // Kotlin
     implementation(kotlin("stdlib-jdk8"))
@@ -83,21 +79,11 @@ tasks.processResources {
     }
 }
 
-// Sets up all the Quilt Mods
-fun getQuiltModLocations(config: Configuration): String {
-    val sb = StringBuilder();
-    for (obj in config.allDependencies) {
-        sb.append(File.pathSeparator + config.files(obj).first())
-    }
-    return sb.toString()
-}
 
 var jarFile = tasks.named<Jar>("jar").flatMap { jar -> jar.archiveFile }.get().asFile
-println("Mod JAR File: `$jarFile'")
 val defaultArgs = listOf(
-    "-Dloader.skipMcProvider=true",
-    "-Dloader.gameJarPath=${cosmicreach.asPath}", // Defines path to Cosmic Reach
-    "-Dloader.addMods=$jarFile${getQuiltModLocations(quiltMod)}" // Add the jar of this project
+        "-Dloader.development=true", // Allows stuff to be found through the classpath
+        "-Dloader.gameJarPath=${cosmicreach.asPath}", // Defines path to Cosmic Reach
 )
 
 application {
