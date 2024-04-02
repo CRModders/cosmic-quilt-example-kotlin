@@ -8,7 +8,7 @@ plugins {
 repositories {
     ivy {
         name = "Cosmic Reach"
-        url = uri("https://cosmic-archive.netlify.app/")
+        url = uri("https://github.com/CRModders/CosmicArchive/raw/main/")
         patternLayout {
             artifact("/Cosmic Reach-[revision].jar")
         }
