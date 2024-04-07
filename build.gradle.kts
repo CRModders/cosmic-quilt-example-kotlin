@@ -63,14 +63,14 @@ dependencies {
     cosmicreach("finalforeach:cosmicreach:${project.properties["cosmic_reach_version"].toString()}")
 
     // Cosmic Quilt
-    implementation("org.codeberg.CRModders:cosmic-quilt:${project.properties["cosmic_quilt_version"].toString()}")
+    internal("org.codeberg.CRModders:cosmic-quilt:${project.properties["cosmic_quilt_version"].toString()}")
 
     // FluxAPI
     //  If you don't want FluxAPI included in your project, remove this and the reference in the `gradle.properties`
 //    internal("com.github.CRModders:FluxAPI:${project.properties["fluxapi_version"].toString()}")
 
     // Kotlin
-    implementation(kotlin("stdlib-jdk8"))
+    internal(kotlin("stdlib-jdk8"))
 }
 
 tasks.processResources {
