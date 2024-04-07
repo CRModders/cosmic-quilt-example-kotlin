@@ -41,9 +41,22 @@ repositories {
     mavenCentral()
 }
 
+
+// Config to provide the Cosmic Reach project
 val cosmicreach: Configuration by configurations.creating {
     configurations.compileOnly.get().extendsFrom(this)
 }
+// Allows to include something without it being in the maven (recommended to be used when including mods)
+val internal: Configuration by configurations.creating {
+    isVisible = false
+    isCanBeConsumed = false
+    isCanBeResolved = false
+}
+configurations["compileClasspath"].extendsFrom(internal)
+configurations["runtimeClasspath"].extendsFrom(internal)
+configurations["testCompileClasspath"].extendsFrom(internal)
+configurations["testRuntimeClasspath"].extendsFrom(internal)
+
 
 dependencies {
     // Cosmic Reach
@@ -54,7 +67,7 @@ dependencies {
 
     // FluxAPI
     //  If you don't want FluxAPI included in your project, remove this and the reference in the `gradle.properties`
-//    implementation("com.github.CRModders:FluxAPI:${project.properties["fluxapi_version"].toString()}")
+//    internal("com.github.CRModders:FluxAPI:${project.properties["fluxapi_version"].toString()}")
 
     // Kotlin
     implementation(kotlin("stdlib-jdk8"))
