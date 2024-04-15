@@ -71,7 +71,7 @@ dependencies {
     // Cosmic Quilt
     internal("dev.crmodders:cosmicquilt:${project.properties["cosmic_quilt_version"].toString()}")
     // Modmenu
-    internal("dev.crmodders:modmenu:${project.properties["modmenu_version"].toString()}")
+//    internal("dev.crmodders:modmenu:${project.properties["modmenu_version"].toString()}")
 
 
     // FluxAPI
