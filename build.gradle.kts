@@ -22,6 +22,12 @@ repositories {
         }
     }
 
+
+    maven("https://maven.crmodders.dev/releases") {
+        name = "crmReleases"
+    }
+
+
     maven("https://jitpack.io") {
         name = "JitPack"
     }
@@ -63,7 +69,7 @@ dependencies {
     cosmicreach("finalforeach:cosmicreach:${project.properties["cosmic_reach_version"].toString()}")
 
     // Cosmic Quilt
-    internal("org.codeberg.CRModders:cosmic-quilt:${project.properties["cosmic_quilt_version"].toString()}")
+    internal("dev.crmodders:cosmicquilt:${project.properties["cosmic_quilt_version"].toString()}")
 
     // FluxAPI
     //  If you don't want FluxAPI included in your project, remove this and the reference in the `gradle.properties`
