@@ -70,6 +70,9 @@ dependencies {
 
     // Cosmic Quilt
     internal("dev.crmodders:cosmicquilt:${project.properties["cosmic_quilt_version"].toString()}")
+    // Modmenu
+    internal("dev.crmodders:modmenu:${project.properties["modmenu_version"].toString()}")
+
 
     // FluxAPI
     //  If you don't want FluxAPI included in your project, remove this and the reference in the `gradle.properties`
