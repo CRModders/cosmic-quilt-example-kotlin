@@ -73,7 +73,7 @@ dependencies {
 
     // FluxAPI
     //  If you don't want FluxAPI included in your project, remove this and the reference in the `gradle.properties`
-//    internal("com.github.CRModders:FluxAPI:${project.properties["fluxapi_version"].toString()}")
+//    internal("dev.crmodders:fluxapi:${project.properties["fluxapi_version"].toString()}")
 
     // Kotlin
     internal(kotlin("stdlib-jdk8"))
