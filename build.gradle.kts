@@ -23,11 +23,6 @@ repositories {
     }
 
 
-    maven("https://maven.crmodders.dev/releases") {
-        name = "crmReleases"
-    }
-
-
     maven("https://jitpack.io") {
         name = "JitPack"
     }
@@ -43,6 +38,14 @@ repositories {
     maven("https://repo.spongepowered.org/maven/") {
         name = "Sponge"
     }
+
+
+    /* // CRM repos, you may or may not want it. (you wont need it as CRMM stuff is also on jitpack)
+    maven("https://maven.crmodders.dev/releases") {
+        name = "crmReleases"
+    }
+     */
+
 
     mavenCentral()
 }
@@ -67,16 +70,13 @@ configurations["testRuntimeClasspath"].extendsFrom(internal)
 dependencies {
     // Cosmic Reach
     cosmicreach("finalforeach:cosmicreach:${project.properties["cosmic_reach_version"].toString()}")
-
     // Cosmic Quilt
-    internal("dev.crmodders:cosmicquilt:${project.properties["cosmic_quilt_version"].toString()}")
+    internal("org.codeberg.CRModders:cosmic-quilt:${project.properties["cosmic_quilt_version"].toString()}")
+
+
     // Modmenu
-//    internal("dev.crmodders:modmenu:${project.properties["modmenu_version"].toString()}")
+//    internal("org.codeberg.CRModders:modmenu:${project.properties["modmenu_version"].toString()}")
 
-
-    // FluxAPI
-    //  If you don't want FluxAPI included in your project, remove this and the reference in the `gradle.properties`
-//    internal("dev.crmodders:fluxapi:${project.properties["fluxapi_version"].toString()}")
 
     // Kotlin
     internal(kotlin("stdlib-jdk8"))
