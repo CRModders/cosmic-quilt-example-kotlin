@@ -5,7 +5,7 @@
     "group": "${mod_group}",
     "id": "${mod_id}",
     "version": "${mod_version}",
-    "intermediate_mappings":"net.fabricmc:intermediary",
+    "intermediate_mappings": "net.fabricmc:intermediary",
 
     "metadata": {
       "name": "${mod_name}",

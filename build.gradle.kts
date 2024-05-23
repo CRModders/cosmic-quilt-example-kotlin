@@ -73,7 +73,6 @@ dependencies {
     // Cosmic Quilt
     internal("org.codeberg.CRModders:cosmic-quilt:${project.properties["cosmic_quilt_version"].toString()}")
 
-
     // Modmenu
 //    internal("org.codeberg.CRModders:modmenu:${project.properties["modmenu_version"].toString()}")
 
