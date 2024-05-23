@@ -40,7 +40,7 @@ repositories {
     }
 
 
-    /* // CRM repos, you may or may not want it. (you wont need it as CRMM stuff is also on jitpack)
+    /* // CRM repos, you may or may not want it (you won't need it as CRM stuff is also on jitpack).
     maven("https://maven.crmodders.dev/releases") {
         name = "crmReleases"
     }
@@ -77,9 +77,8 @@ dependencies {
     // Modmenu
 //    internal("org.codeberg.CRModders:modmenu:${project.properties["modmenu_version"].toString()}")
 
-
     // Kotlin
-    internal(kotlin("stdlib-jdk8"))
+    internal("org.codeberg.CRModders:kosmic:${project.properties["kosmic_version"].toString()}")
 }
 
 tasks.processResources {
